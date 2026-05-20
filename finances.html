@@ -1,0 +1,75 @@
+<html>
+<head>
+    <title>💰 Finances</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .counter {
+            font-size: 48px;
+            color: #FFD700;
+            font-weight: bold;
+            margin: 40px 0;
+            text-shadow: 0 0 20px #000;
+        }
+
+        .card {
+            width: 70%;
+            margin: 0 auto;
+            background: rgba(0,0,0,0.4);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .currency {
+            color: #00ffcc;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>💰 Finances</h1>
+
+    <div class="card">
+        <p>
+            Финансирование проекта Кронос происходило через подставные корпорации, 
+            зарегистрированные в офшорных зонах и научных фондах.
+        </p>
+        <p>
+            Деньги перераспределялись на технологические исследования, вооружение и разработку искусственного интеллекта.
+        </p>
+        <p>
+            Система отчётов была зашифрована и включала сотни ложных контрактов.
+        </p>
+    </div>
+
+    <div class="counter" id="money-counter">0 $</div>
+    <div class="currency">Текущий баланс проекта Kronos</div>
+
+     <button onclick="history.back()">BACK</button>
+
+    <script>
+        const targetValue = 350500; 
+        const duration = 3000; 
+        const counterElement = document.getElementById('money-counter');
+
+        let current = 0;
+        const step = Math.ceil(targetValue / (duration / 16)); 
+
+        function animateCounter() {
+            current += step;
+            if (current >= targetValue) {
+                current = targetValue;
+                counterElement.textContent = current.toLocaleString('en-US') + ' $';
+            } else {
+                counterElement.textContent = current.toLocaleString('en-US') + ' $';
+                requestAnimationFrame(animateCounter);
+            }
+        }
+
+        window.onload = animateCounter;
+    </script>
+</body>
+</html>

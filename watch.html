@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Kronos Watch</title>
+
+<style>
+body{
+    margin:0;
+    background:black;
+    overflow:hidden;
+}
+
+.screen{
+    display:flex;
+    width:100vw;
+    height:100vh;
+}
+
+.side{
+    width:50%;
+    height:100%;
+    position:relative;
+}
+
+.side img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0;
+    transition:opacity 0.6s;
+}
+
+.side img.show{
+    opacity:1;
+}
+
+.terminated{
+    position:absolute;
+    top:45%;
+    left:0;
+    width:100%;
+    padding:18px 0;
+
+    background:#e00000;
+    color:white;
+
+    font-size:48px;
+    font-weight:900;
+    letter-spacing:4px;
+    text-align:center;
+
+    opacity:0;
+}
+
+.terminated.show{
+    opacity:1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="screen">
+
+    <div class="side">
+        <img id="heroImg">
+        <div id="termHero" class="terminated">TERMINATED</div>
+    </div>
+
+    <div class="side">
+        <img id="omniImg">
+        <div id="termOmni" class="terminated">TERMINATED</div>
+    </div>
+
+</div>
+
+<script>
+
+/* hero, omni, loser */
+const battles = [
+ ["universalman.jpg","omni1.jpg","hero"],
+ ["psycwave.jpg","omni1.jpg","hero"],
+ ["everseer.jpg","omni1.jpg","hero"],
+ ["macroburst.jpg","omni1.jpg","omni"],
+ ["macroburst.jpg","omni2.jpg","hero"],
+ ["phylange.jpg","omni2.jpg","hero"],
+ ["blazestone.jpg","omni2.jpg","hero"],
+ ["dynaguy.jpg","omni2.jpg","omni"],
+ ["dynaguy.jpg","omni3.jpg","hero"],
+ ["downburst.jpg","omni3.jpg","hero"],
+ ["hypershock.jpg","omni3.jpg","omni"],
+ ["hypershock.jpg","omni4.jpg","hero"],
+ ["apogee.jpg","omni4.jpg","hero"],
+ ["blitzerman.jpg","omni4.jpg","hero"],
+ ["tradewind.jpg","omni4.jpg","hero"],
+ ["vectress.jpg","omni4.jpg","hero"],
+ ["gazerbeam.jpg","omni4.jpg","omni"],
+ ["gazerbeam.jpg","omni5.jpg","hero"],
+ ["stormicide.jpg","omni5.jpg","hero"],
+ ["gammajack.jpg","omni5.jpg","omni"],
+ ["gammajack.jpg","omni6.jpg","hero"],
+ ["splashdown.jpg","omni6.jpg","hero"],
+ ["plasmabolt.jpg","omni6.jpg","omni"],
+ ["plasmabolt.jpg","omni7.jpg","hero"],
+ ["metaman.jpg","omni7.jpg","omni"],
+ ["metaman.jpg","omni8.jpg","hero"],
+ ["mrincredible.jpg","omni8.jpg","omni"],
+ ["mrincredible.jpg","omni9.jpg","hero"]
+];
+
+let i = 0;
+
+const hero = document.getElementById("heroImg");
+const omni = document.getElementById("omniImg");
+const termHero = document.getElementById("termHero");
+const termOmni = document.getElementById("termOmni");
+
+function play(){
+
+    hero.classList.remove("show");
+    omni.classList.remove("show");
+    termHero.classList.remove("show");
+    termOmni.classList.remove("show");
+
+    setTimeout(()=>{
+
+        hero.src="/static/"+battles[i][0];
+        omni.src="/static/omni/"+battles[i][1];
+
+        hero.classList.add("show");
+        omni.classList.add("show");
+
+        setTimeout(()=>{
+            if(battles[i][2]==="hero"){
+                termHero.classList.add("show");
+            }else{
+                termOmni.classList.add("show");
+            }
+        },600);
+
+        i++;
+
+        if(i===battles.length){
+            setTimeout(()=>{
+                history.back();
+            },1500);
+        }
+
+    },150);
+}
+
+play();
+setInterval(play,1800);
+
+</script>
+
+</body>
+</html>

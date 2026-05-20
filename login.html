@@ -1,0 +1,82 @@
+<html>
+<head>
+    <title>entrance</title>
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #2852b5;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        #displayText {
+            font-size: 48px;
+            letter-spacing: 6px;
+        }
+
+        #hiddenInput {
+            opacity: 0;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body onclick="focusInput()">
+
+    <div id="displayText">PASSWORD</div>
+
+    <form id="loginForm" method="POST">
+        <input id="hiddenInput" type="text" name="password" autocomplete="off">
+    </form>
+
+    <script>
+        const hiddenInput = document.getElementById("hiddenInput");
+        const displayText = document.getElementById("displayText");
+        const form = document.getElementById("loginForm");
+
+        function focusInput() {
+            hiddenInput.focus();
+        }
+
+        window.onload = () => {
+            hiddenInput.focus();
+        };
+
+        let animating = false;
+
+        hiddenInput.addEventListener("input", function () {
+            let text = hiddenInput.value;
+
+            displayText.innerHTML = ""; 
+            animating = true;
+
+            let i = 0;
+
+            function animate() {
+                if (i < text.length) {
+                    displayText.innerHTML += text[i];
+                    i++;
+                    setTimeout(animate, 80); 
+                } else {
+                    animating = false;
+                }
+            }
+
+            animate();
+        });
+
+        hiddenInput.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                form.submit();
+            }
+        });
+    </script>
+
+</body>
+</html>
